@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import Modal from "@/components/modals/Modal";
+import Navbar from "@/components/navbar/navbar";
 
 const nunito = Nunito({
   variable: "--font-nunito-sans",
@@ -23,6 +25,8 @@ export default function RootLayout({
       <body
         className={`${nunito.variable}  antialiased`}
       > 
+        <Modal title='Hello World' isOpen />
+        <Navbar/>
         {children}
       </body>
     </html>

@@ -4,7 +4,7 @@ import { CircleUserRound } from "lucide-react"
 
 const Avatar = () => {
   return (
-    <div><CircleUserRound/></div>
+    <div className="rounded-full"><CircleUserRound/></div>
   )
 }
 
