@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   onSubmit,
   title,
   body,
-  footer,
+  // footer,
   actionLabel,
   disabled,
   secondaryAction,
@@ -48,8 +48,9 @@ const Modal: React.FC<ModalProps> = ({
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
-      onSubmit()
+      return
     }
+    onSubmit()
   }, [disabled, onSubmit])
 
   const handleSecondaryAction = useCallback(() => {

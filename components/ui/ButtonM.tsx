@@ -1,14 +1,14 @@
-import { LucideIcon } from "lucide-react";
+'use client';
+import type { LucideIcon } from "lucide-react";
 
 interface ButtonMProps {
-  label: string;
+  label?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
   Icon?: LucideIcon;
 }
- 
 const ButtonM: React.FC<ButtonMProps> = ({
   label,
   onClick,
@@ -18,7 +18,7 @@ const ButtonM: React.FC<ButtonMProps> = ({
   Icon
 }) => {
   return ( 
-    <button
+    <button 
       onClick={onClick}
       disabled= {disabled}
       className={`

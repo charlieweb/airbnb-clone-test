@@ -3,6 +3,7 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import RegisterModal from "@/components/modals/RegisterModal";
+import ToasterProvider from "@/providers/ToasterProvider";
 
 const nunito = Nunito({
   variable: "--font-nunito-sans",
@@ -17,14 +18,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}:{
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${nunito.variable}  antialiased`}
-      > 
+      <body className={`${nunito.variable}  antialiased`}> 
+        <ToasterProvider/>
         <RegisterModal/>
         <Navbar/>
         {children}
