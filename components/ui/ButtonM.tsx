@@ -1,5 +1,7 @@
 'use client';
-import type { LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import { IconType } from 'react-icons';
+
 
 interface ButtonMProps {
   label?: string;
@@ -7,7 +9,7 @@ interface ButtonMProps {
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
-  Icon?: LucideIcon;
+  Icon?: LucideIcon | IconType;
 }
 const ButtonM: React.FC<ButtonMProps> = ({
   label,
@@ -15,7 +17,8 @@ const ButtonM: React.FC<ButtonMProps> = ({
   disabled,
   outline,
   small,
-  Icon
+  Icon,
+  // Ricon
 }) => {
   return ( 
     <button 
@@ -39,13 +42,14 @@ const ButtonM: React.FC<ButtonMProps> = ({
           
         `}
     >
+      
       {Icon && (
         <Icon
         className ="
         absolute
         left-4
         top-3
-      "
+      " size={25}
         />
       )}
       {label}

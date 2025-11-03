@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   onSubmit,
   title,
   body,
-  // footer,
+  footer,
   actionLabel,
   disabled,
   secondaryAction,
@@ -98,6 +98,7 @@ const Modal: React.FC<ModalProps> = ({
                   
                   <ButtonM label={actionLabel} onClick={handleSubmit} disabled={disabled} />
                 </div>
+                { footer }
               </div>
             </div>
           </div>
