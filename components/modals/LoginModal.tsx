@@ -1,19 +1,21 @@
 'use client'
-import axios from 'axios'
+import { signIn } from 'next-auth/react'
+import { authClient } from '@/lib/auth-client'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import useRegisterModal from '@/hooks/useRegisterModal'
+import useLoginModal from '@/hooks/useLoginModal'
 import Modal from './Modal'
 import Heading from '../navbar/Heading'
 import { Input } from '../Inputs/Input'
 import toast from 'react-hot-toast'
 import ButtonM from '../ui/ButtonM'
 
-
-const RegisterModal = () => {
+const LoginModal = () => {
   const registerModal = useRegisterModal()
+  const loginModal = useLoginModal()
   const [isloading, setIsloading] = useState(false)
   const {
     register,
@@ -21,53 +23,42 @@ const RegisterModal = () => {
     formState: { errors }
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
       email: '',
       password: ''
     }
   })
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsloading(true)
-    console.log('Submitted data:', data)
     try {
       // This calls the sign-up endpoint via Better Auth client
-      const res = await fetch("/api/auth/sign-up/email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-        name: data.name,
-      }),
-    });
+      const res = await fetch('/api/auth/email/sign-in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password
+        })
+      })
 
-    const result = await res.json();
+      const result = await res.json()
 
-    if (!res.ok) {
-      throw new Error(result.error || "Sign-up failed");
-    }
-      toast.success('Account created successfully!')
-      registerModal.onClose()
+      if (!res.ok) {
+        throw new Error(result.error || 'Sign-up failed')
+      }
+      toast.success('Login successfully!')
+      loginModal.onClose()
     } catch (error) {
-      toast.error('Something went wrong during registration')
+      toast.error('Something went wrong during Sign In')
     } finally {
       setIsloading(false)
     }
   }
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Airbnb" subtitle="Create an Account" />
+      <Heading title="Welcome back" subtitle="Login to your account" />
       <Input
         id="email"
         label="Email"
-        disabled={isloading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="name"
-        label="Name"
         disabled={isloading}
         register={register}
         errors={errors}
@@ -115,10 +106,10 @@ const RegisterModal = () => {
   return (
     <Modal
       disabled={isloading}
-      isOpen={registerModal.isOpen}
-      title="Register"
+      isOpen={loginModal.isOpen}
+      title="Login"
       actionLabel="Continue"
-      onClose={registerModal.onClose}
+      onClose={loginModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}
@@ -126,4 +117,4 @@ const RegisterModal = () => {
   )
 }
 
-export default RegisterModal
+export default LoginModal

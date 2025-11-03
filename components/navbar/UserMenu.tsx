@@ -4,28 +4,15 @@ import { MenuIcon } from "lucide-react";
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 
 const UserMenu = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = useCallback(()=> {
     setIsOpen((value)=> !value);
   },[]);
-  // const ref = useRef<HTMLDivElement>(null);
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-  //     if (ref.current && !ref.current.contains(event.target as Node)) {
-  //       setIsOpen(true);
-  //     }
-  //   };
-  //    // Add event listener for clicks outside
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   document.addEventListener('touchend', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //     document.removeEventListener('touchend', handleClickOutside);
-  //   };   
-  // }, []);
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
@@ -47,7 +34,7 @@ const UserMenu = () => {
         <div className=" absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer ">
             <MenuItem
-              onClick={()=>{}}
+              onClick={loginModal.onOpen}
               title="Login"
             />
             <MenuItem
