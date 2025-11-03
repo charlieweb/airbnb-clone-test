@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "@/libs/prismadb";
 import bcrypt from "bcrypt";
+import { nextCookies } from "better-auth/next-js";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "mongodb" }),
@@ -19,4 +20,5 @@ export const auth = betterAuth({
       },
     },
   },
+  plugins: [nextCookies()],
 });

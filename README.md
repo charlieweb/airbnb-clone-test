@@ -18,13 +18,17 @@ npx prisma generate
 npx prisma db push
 
 ```
+### Setup Better Auth
+
+```shell
+npx @better-auth/cli genereate
 
 
 ## Getting Started
 
 First, run the development server:
 
-```bash
+```shell
 npm run dev
 # or
 yarn dev
