@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import RegisterModal from "@/components/modals/RegisterModal";
 import ToasterProvider from "@/providers/ToasterProvider";
+import LoginModal from "@/components/modals/LoginModal";
 
 const nunito = Nunito({
   variable: "--font-nunito-sans",
@@ -24,8 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.variable}  antialiased`}> 
-        <ToasterProvider/>
-        <RegisterModal/>
+        <ToasterProvider />
+        <LoginModal/>
+        <RegisterModal />
         <Navbar/>
         {children}
       </body>

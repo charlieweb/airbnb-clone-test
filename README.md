@@ -1,5 +1,23 @@
 This is a [Next.js](https://nextjs.org) project Just for Learning base on tutorial, this is a clone sample of Airbnb Site will use Shadcn for UI components nextjs 15 and app router.
 
+
+### Prerequisites
+
+**Node version 22.x**
+
+
+### Setup .env file
+DATABASE_URL=""
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
+
+### Setup Prisma
+
+```shell
+npx prisma generate
+npx prisma db push
+
+
 ## Getting Started
 
 First, run the development server:
