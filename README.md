@@ -17,6 +17,8 @@ BETTER_AUTH_URL=
 npx prisma generate
 npx prisma db push
 
+```
+
 
 ## Getting Started
 
