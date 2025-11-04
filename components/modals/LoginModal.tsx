@@ -1,6 +1,4 @@
 'use client'
-import { signIn } from 'next-auth/react'
-import { authClient } from '@/lib/auth-client'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { useState } from 'react'
@@ -12,7 +10,7 @@ import Heading from '../navbar/Heading'
 import { Input } from '../Inputs/Input'
 import toast from 'react-hot-toast'
 import ButtonM from '../ui/ButtonM'
-
+import { signIn } from '@/lib/actions/auth-actions'
 const LoginModal = () => {
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
@@ -31,19 +29,9 @@ const LoginModal = () => {
     setIsloading(true)
     try {
       // This calls the sign-up endpoint via Better Auth client
-      const res = await fetch('/api/auth/email/sign-in', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password
-        })
-      })
-
-      const result = await res.json()
-
-      if (!res.ok) {
-        throw new Error(result.error || 'Sign-up failed')
+      const result = await signIn(data.email, data.password)
+      if (!result.user) {
+        toast.error('Something went wrong during Login')
       }
       toast.success('Login successfully!')
       loginModal.onClose()

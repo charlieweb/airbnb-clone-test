@@ -10,6 +10,7 @@ import Heading from '../navbar/Heading'
 import { Input } from '../Inputs/Input'
 import toast from 'react-hot-toast'
 import ButtonM from '../ui/ButtonM'
+import { signIn, signUp } from '@/lib/actions/auth-actions'
 
 
 const RegisterModal = () => {
@@ -30,22 +31,10 @@ const RegisterModal = () => {
     setIsloading(true)
     console.log('Submitted data:', data)
     try {
-      // This calls the sign-up endpoint via Better Auth client
-      const res = await fetch("/api/auth/sign-up/email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-        name: data.name,
-      }),
-    });
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      throw new Error(result.error || "Sign-up failed");
-    }
+      const result = await signUp(data.email, data.password, data.name)
+      if (!result.user) {
+        toast.error('Something went wrong during registration')
+      }
       toast.success('Account created successfully!')
       registerModal.onClose()
     } catch (error) {
