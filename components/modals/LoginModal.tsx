@@ -11,7 +11,10 @@ import { Input } from '../Inputs/Input'
 import toast from 'react-hot-toast'
 import ButtonM from '../ui/ButtonM'
 import { signIn } from '@/lib/actions/auth-actions'
+import { useRouter } from 'next/navigation'
+
 const LoginModal = () => {
+  const router = useRouter()
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
   const [isloading, setIsloading] = useState(false)
@@ -33,7 +36,8 @@ const LoginModal = () => {
       if (!result.user) {
         toast.error('Something went wrong during Login')
       }
-      toast.success('Login successfully!')
+      toast.success('Login successfully!');
+      router.refresh()
       loginModal.onClose()
     } catch (error) {
       toast.error('Something went wrong during Sign In')

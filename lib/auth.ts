@@ -10,7 +10,6 @@ export const auth = betterAuth({
     enabled: true,
     password: {
       hash: async (password) => {
-        console.log("hash called with:", password); // 🔥 should log
         if (!password || typeof password !== "string")
           throw new Error("Password missing");
         return await bcrypt.hash(password, 10);
@@ -24,6 +23,6 @@ export const auth = betterAuth({
     database: {
       generateId: false,
     },
-  },
+  }, 
   plugins: [nextCookies()],
 });

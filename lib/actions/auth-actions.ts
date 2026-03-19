@@ -13,23 +13,23 @@ export const signUp = async (email: string , password: string, name: string) => 
       callbackURL: '/'
     }
   })
-  return result;// You can use Prisma or any other database client to store user data
+  return result;
 }
 
 export const signIn = async (email:string , password:string) => {
-  // Implement sign-up logic here, e.g., create user in database
+  // Implement sign-in logic here, e.g., create user in database
   const result = await auth.api.signInEmail({
     body: {
       email,
       password,
-      callbackURL: '/'
+      callbackURL: '/',
     }
   })
-  return result;// You can use Prisma or any other database client to store user data
+  return result;
 }
 
 export const signOut= async () => {
-  // Implement sign-up logic here, e.g., create user in database
+  // Implement sign-out logic here, e.g., create user in database
   const result = await auth.api.signOut({headers: await headers()})
-  return result;// You can use Prisma or any other database client to store user data
+  return result;
 }
